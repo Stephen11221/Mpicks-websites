@@ -1,8 +1,7 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import React from "react";
 import { motion } from "framer-motion";
 import { Camera, Image as ImageIcon, Mail } from "lucide-react";
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 export default function PhotographyPortfolio() {
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
@@ -13,25 +12,27 @@ export default function PhotographyPortfolio() {
 
   return (
     <>
-      {/* Internal CSS */}
       <style>
         {`
           body {
             background-color: #000;
             color: white;
           }
+
           .navbar-custom {
-            background-color: rgba(0, 0, 0, 0.9);
+            background-color: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(10px);
           }
+
           .hero-section {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 100px 20px;
+            padding: 120px 20px 60px;
           }
+
           .service-card {
             background: #111;
             border: 1px solid #222;
@@ -39,51 +40,81 @@ export default function PhotographyPortfolio() {
             padding: 30px;
             transition: 0.3s ease;
           }
+
           .service-card:hover {
-            transform: scale(1.05);
+            transform: translateY(-5px);
           }
+
           .gallery-img {
             border-radius: 15px;
             height: 250px;
+            width: 100%;
             object-fit: cover;
             transition: 0.3s ease;
           }
+
           .gallery-img:hover {
-            transform: scale(1.05);
+            transform: scale(1.03);
           }
+
           .section-dark {
             background-color: #111;
           }
+
           .btn-custom {
             background-color: #6f42c1;
             border: none;
           }
+
           .btn-custom:hover {
             background-color: #5a32a3;
+          }
+
+          @media (max-width: 768px) {
+            .hero-section h1 {
+              font-size: 2rem;
+            }
+
+            .hero-section p {
+              font-size: 1rem;
+            }
           }
         `}
       </style>
 
-      {/* Navigation */}
+      {/* Navbar */}
       <nav className="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top border-bottom border-secondary">
         <div className="container">
           <a className="navbar-brand fw-bold" href="#">Photography</a>
-          <div className="navbar-nav ms-auto">
-            {[
-              { name: "Home", id: "home" },
-              { name: "Services", id: "services" },
-              { name: "Gallery", id: "gallery" },
-              { name: "About", id: "about" },
-              { name: "Contact", id: "contact" },
-            ].map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className="btn btn-link text-white text-decoration-none"
-              >
-                {item.name}
-              </button>
-            ))}
+
+          {/* Mobile Toggle */}
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <div className="navbar-nav ms-auto text-center">
+              {[
+                { name: "Home", id: "home" },
+                { name: "Services", id: "services" },
+                { name: "Gallery", id: "gallery" },
+                { name: "About", id: "about" },
+                { name: "Contact", id: "contact" },
+              ].map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className="btn btn-link text-white text-decoration-none"
+                >
+                  {item.name}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </nav>
@@ -95,10 +126,10 @@ export default function PhotographyPortfolio() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="display-4 fw-bold mb-4">
-            Hi! My name is John . <br /> I’m a Photographer.
+          <h1 className="display-5 display-md-4 fw-bold mb-4">
+            Hi! My name is John. <br /> I’m a Photographer.
           </h1>
-          <p className="lead text-secondary">
+          <p className="lead text-secondary px-2">
             Professional photography services for portraits, landscapes, and commercial projects.
           </p>
         </motion.div>
@@ -114,7 +145,7 @@ export default function PhotographyPortfolio() {
               { icon: <ImageIcon size={32} />, title: "Landscapes", desc: "Stunning nature photography." },
               { icon: <Mail size={32} />, title: "Commercial", desc: "Visuals for brands & businesses." },
             ].map((service, index) => (
-              <div key={index} className="col-md-4">
+              <div key={index} className="col-12 col-md-6 col-lg-4">
                 <motion.div whileHover={{ scale: 1.05 }} className="service-card">
                   <div className="mb-3 text-primary">{service.icon}</div>
                   <h5 className="fw-bold">{service.title}</h5>
@@ -132,12 +163,12 @@ export default function PhotographyPortfolio() {
           <h2 className="mb-5 fw-bold">Latest Projects</h2>
           <div className="row g-4">
             {[1,2,3,4,5,6].map((item) => (
-              <div key={item} className="col-md-4">
+              <div key={item} className="col-12 col-sm-6 col-lg-4">
                 <motion.img
                   whileHover={{ scale: 1.05 }}
                   src={`https://source.unsplash.com/random/600x600?sig=${item}`}
                   alt="Gallery"
-                  className="img-fluid gallery-img"
+                  className="gallery-img"
                 />
               </div>
             ))}
@@ -149,7 +180,7 @@ export default function PhotographyPortfolio() {
       <section id="about" className="py-5 section-dark text-center">
         <div className="container">
           <h2 className="fw-bold mb-4">About Me</h2>
-          <p className="text-secondary">
+          <p className="text-secondary px-3">
             I am a passionate photographer focused on storytelling through creative composition and lighting.
           </p>
         </div>
